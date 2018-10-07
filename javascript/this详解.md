@@ -94,3 +94,27 @@ var yourcar = {
 
 new yourcar.getThis()//getThis {instance: "myinstance"}
 ```
+
+```js
+
+function foo(something) {
+   this.a = something;
+}
+
+var obj1 = {};
+
+var bar = foo.bind( obj1 );
+
+bar( 2 );
+console.log( obj1.a ); // 2
+var baz = new bar(3);
+console.log( obj1.a ); // 2
+console.log( baz.a ); // 3
+```
+
+## 具体原理
+1 this 是被自动定义在所有函数的作用域中
+2 this是在运行时候进行绑定的，并不是在编写进行绑定的，所以this的取值取决于函数调用的方式
+
+### 确定this的值
+1 调用栈，栈中的第二个就是函数的调用位置
